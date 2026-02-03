@@ -6,7 +6,7 @@ import { IoCall, IoSearch } from "react-icons/io5";
 
 const Navbar = () => {
   return (
-    <Container className="flex items-center justify-between">
+    <Container className="flex items-center justify-between border-t border-t-[#999999]/1 ">
       {/* logo */}
       <div className="flex items-center justify-center gap-1">
         <Image src="/nav-logo.png" alt="logo" width={30} height={30} />
