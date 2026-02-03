@@ -4,7 +4,7 @@ import Container from "../Container";
 
 const Topnav = () => {
   return (
-    <Container className="border-b py-2 border-gray-300">
+    <Container className="border-b py-3 border-gray-300">
       <h1 className="text-xs text-[#808080] flex items-center justify-start gap-1 py-0.5">
         <span>
           <CiLocationOn size={20} />

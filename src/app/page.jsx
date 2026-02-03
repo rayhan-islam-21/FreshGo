@@ -1,15 +1,12 @@
-import LowerNav from '@/components/navitems/LowerNav';
-import Navbar from '@/components/navitems/Navbar';
-import Topnav from '@/components/navitems/Topnav';
-import React from 'react';
+import React from "react";
+import Header from "@/components/navitems/Header";
+import Hero from "@/components/Hero/Hero";
 
 const page = () => {
   return (
     <>
-    <Topnav/>
-    <Navbar/>
-    <LowerNav/>
-      
+      <Header />
+      <Hero/>
     </>
   );
 };
