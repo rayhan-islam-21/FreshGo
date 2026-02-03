@@ -15,13 +15,13 @@ import { Button } from "../ui/button";
 
 const LowerNav = () => {
   return (
-    <div className="bg-[#333333]  mx-auto  ">
-      <Container className="flex items-center justify-between h-14">
-        
-        {/* LEFT: Categories */}
-        <div className="flex items-center gap-2 min-w-55">
-          <button className="bg-[#00B307] p-3 text-white">
-            <HiOutlineBars3 size={32} />
+    <div className="">
+      <Container className="flex items-center justify-between h-16">
+
+        {/* LEFT */}
+        <div className="flex h-full items-center bg-[#333333] gap-2 min-w-55">
+          <button className="bg-[#00B307] h-full px-3 text-white flex items-center">
+            <HiOutlineBars3 size={28} />
           </button>
 
           <span className="text-sm font-medium text-white">
@@ -30,13 +30,11 @@ const LowerNav = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                size="icon"
-                variant="ghost"
-                className="text-white hover:bg-white/10"
+              <button
+                className="text-white p-5 h-full hover:bg-white/10"
               >
-                <IoIosArrowDown size={16} />
-              </Button>
+                <IoIosArrowDown size={20} />
+              </button>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent align="start">
@@ -58,9 +56,9 @@ const LowerNav = () => {
           </DropdownMenu>
         </div>
 
-        {/* CENTER: Navigation */}
-        <nav className="hidden md:block  mx-10 px-8 bg-[#1A1A1A] py-4">
-          <ul className="flex items-center space-x-10 text-sm font-medium">
+        {/* CENTER */}
+        <nav className="hidden md:flex h-full bg-[#1A1A1A] px-8">
+          <ul className="flex items-center gap-10 text-sm font-medium">
             {[
               { name: "Home", href: "/" },
               { name: "Shop", href: "/shop" },
@@ -81,18 +79,18 @@ const LowerNav = () => {
           </ul>
         </nav>
 
-        {/* RIGHT: Icons */}
-        <div className="flex items-center bg-[#1A1A1A] py-3 px-8 flex-1 justify-end gap-5">
+        {/* RIGHT */}
+        <div className="flex flex-1 h-full items-center justify-end bg-[#1A1A1A] px-8 gap-7">
           <Link href="/wishlist" className="text-white hover:text-green-500">
-            <FaRegHeart size={25} />
+            <FaRegHeart size={22} />
           </Link>
 
           <Link href="/cart" className="text-white hover:text-green-500">
-            <HiOutlineShoppingBag size={25} />
+            <HiOutlineShoppingBag size={22} />
           </Link>
 
           <Link href="/profile" className="text-white hover:text-green-500">
-            <GoPerson size={25} />
+            <GoPerson size={22} />
           </Link>
         </div>
 
