@@ -6,14 +6,14 @@ import { IoCall, IoSearch } from "react-icons/io5";
 
 const Navbar = () => {
   return (
-    <Container className="flex items-center justify-between border-t border-t-[#999999]/1 ">
+    <Container className="flex items-center py-6 justify-between border-t border-t-[#999999]/1 ">
       {/* logo */}
       <div className="flex items-center justify-center gap-1">
         <Image src="/nav-logo.png" alt="logo" width={30} height={30} />
         <h1 className="text-xl font-bold">FreshGo</h1>
       </div>
       {/* search bar */}
-      <div className="flex w-full relative max-w-md mx-auto">
+      <div className="flex w-full relative max-w-sm mx-auto">
         <IoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
 
         <input
