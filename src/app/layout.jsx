@@ -17,9 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppinsFont.className}`}>
-        <Navbar />
         {children}
-        <Footer />
       </body>
     </html>
   )
