@@ -18,44 +18,6 @@ const LowerNav = () => {
     <div className="">
       <Container className="flex items-center justify-between h-16">
 
-        {/* LEFT */}
-        <div className="flex h-full items-center bg-[#333333] gap-2 min-w-55">
-          <button className="bg-[#00B307] h-full px-3 text-white flex items-center">
-            <HiOutlineBars3 size={28} />
-          </button>
-
-          <span className="text-sm font-medium text-white">
-            All Categories
-          </span>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button
-                className="text-white p-5 h-full hover:bg-white/10"
-              >
-                <IoIosArrowDown size={20} />
-              </button>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent align="start">
-              {[
-                "fruit",
-                "vegetable",
-                "fish",
-                "drinks",
-                "cooking",
-                "bakery",
-              ].map((item) => (
-                <DropdownMenuItem key={item} asChild>
-                  <Link href={`/category/${item}`}>
-                    {item.charAt(0).toUpperCase() + item.slice(1)}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-
         {/* CENTER */}
         <nav className="hidden md:flex h-full bg-[#1A1A1A] px-8">
           <ul className="flex items-center gap-10 text-sm font-medium">

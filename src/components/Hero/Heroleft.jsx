@@ -13,7 +13,6 @@ import {
   FaCheese,
   FaUtensils,
   FaPlus,
-  FaBars,
 } from "react-icons/fa";
 
 const categories = [
@@ -33,27 +32,30 @@ const HeroLeft = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-   <aside className="md:w-68  ">
+    <aside className="md:w-68 hidden">
       <ul className="space-y-1 border border-gray-200  shadow-sm overflow-hidden">
-        {
-          categories.map((cat)=>{
-            return (
-              <li key={cat.slug} >
-                <Link href={`/categories/${cat.slug}`}>
-                <div className="flex items-center justify-start gap-1 p-3 hover:bg-gray-100">
-                  <cat.icon className="inline-block mr-2"/>
+        {categories.map((cat) => {
+          return (
+            <li key={cat.slug}>
+              <Link href={`/categories/${cat.slug}`}>
+                <div className="flex items-center justify-start gap-1 p-3 hover:text-white hover:bg-[#00B307]">
+                  <cat.icon className="inline-block mr-2" />
                   <span className="font-medium">{cat.name}</span>
                 </div>
-                  
-                </Link>
-              </li>
-            )
-              
-            
-          })
-        }
+              </Link>
+            </li>
+          );
+        })}
+        {/* divider */}
+        <hr className="border-t-2 border-gray-200" />
+        <li>
+          <button className="w-full text-left p-3 flex items-center gap-2 items-center hover:text-white hover:bg-[#00B307]">
+            <FaPlus />
+            View All Categories
+          </button>
+        </li>
       </ul>
-   </aside>
+    </aside>
   );
 };
 
