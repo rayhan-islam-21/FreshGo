@@ -5,6 +5,12 @@ import {
   FaLock,
   FaUndoAlt,
 } from "react-icons/fa";
+import { IoBagCheckOutline } from "react-icons/io5";
+import { TfiHeadphoneAlt } from "react-icons/tfi";
+import { BsBoxSeam } from "react-icons/bs";
+
+
+
 import Container from '../Container';
 
 export const features = [
@@ -15,19 +21,19 @@ export const features = [
     slug: "free-shipping",
   },
   {
-    icon: FaHeadset,
+    icon: TfiHeadphoneAlt,
     title: "Customer Support 24/7",
     subtitle: "Instant access to Support",
     slug: "customer-support",
   },
   {
-    icon: FaLock,
+    icon: IoBagCheckOutline,
     title: "100% Secure Payment",
     subtitle: "We ensure your money is safe",
     slug: "secure-payment",
   },
   {
-    icon: FaUndoAlt,
+    icon: BsBoxSeam,
     title: "Money-Back Guarantee",
     subtitle: "30 Days Money-Back Guarantee",
     slug: "money-back",
@@ -38,7 +44,7 @@ export const features = [
 const BelowHero = () => {
     return (
         <Container >
-            <div className='p-8 shadow-md bg-[#FFFFFF]  rounded-md border-black/20 mt-4 flex items-center justify-between'>
+            <div className='p-8 shadow-md  bg-[#FFFFFF]  rounded-md border-black/20 mt-4 flex items-center justify-between'>
                 {
                 features.map((f)=>{
                     return (
