@@ -1,25 +1,37 @@
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-model Product {
-  id    Int    @id @default(autoincrement())
-  name  String
-  price Float
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  orders    Order[]
+  createdAt DateTime @default(now())
+
+  @@map("users")
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  name      String
+  price     Decimal  @db.Decimal(10, 2)
+  createdAt DateTime @default(now())
+
+  @@map("products")
 }
 
 model Order {
-  id     Int  @id @default(autoincrement())
-  userId Int
-  total  Float
+  id        Int      @id @default(autoincrement())
+  total     Decimal  @db.Decimal(10, 2)
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@map("orders")
 }
