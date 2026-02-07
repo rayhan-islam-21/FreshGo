@@ -51,7 +51,7 @@ export const sidebarLinks = [
       {
         name: "Control Authority",
         slug: "/admin/control",
-        icon: <LuShieldCheck  />,
+        icon: <LuShieldCheck />,
       },
     ],
   },
@@ -59,7 +59,7 @@ export const sidebarLinks = [
 
 const Sidebar = () => {
   return (
-    <div>
+    <div className="w-full p-3">
       {/* logo and bar  */}
       <div className="flex items-center border  justify-between p-3">
         <div className="flex items-center justify-center gap-1">
@@ -71,23 +71,25 @@ const Sidebar = () => {
         </div>
       </div>
       {/* links */}
-      <div >
+      <div>
         <div>
           {sidebarLinks.map((side) => {
             return (
               <div className="border flex flex-col gap-3" key={side.category}>
-                <h1 className="text-sm text-gray-800 border-b p-2">{`${side.category}`}</h1>
+                <h1 className="text-sm text-gray-800 border-b">{`${side.category}`}</h1>
                 <div>
                   {side.items.map((links) => {
                     return (
-                      <div  key={links.name}>
-                        <Link className="flex items-center justify-start gap-2" href={`${links.slug}`}>
-                            <div>
-                                {links.icon}
-                            </div>
+                      <Link
+                        href={`${links.slug}`}
+                        className=""
+                        key={links.name}
+                      >
+                        <div className="flex items-center justify-start gap-1.5 border hover:bg-[#4EA674] hover:text-[#FFFFFF] p-2 bg-[#FFFFFF]">
+                          <div>{links.icon}</div>
                           <h2>{links.name}</h2>
-                        </Link>
-                      </div>
+                        </div>
+                      </Link>
                     );
                   })}
                 </div>
