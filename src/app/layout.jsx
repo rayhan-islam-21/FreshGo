@@ -1,7 +1,6 @@
 import '../styles/globals.css'
-import Navbar from '../components/navitems/Navbar'
-import Footer from '../components/Footer'
 import { Poppins } from 'next/font/google'
+import ReduxProvider from '@/store/Providers'
 
 export const poppinsFont = Poppins({
   subsets: ['latin'],
@@ -17,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppinsFont.className}`}>
-        {children}
+       <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   )
