@@ -1,14 +1,17 @@
-import AdminSidebar from '../../components/AdminSidebar'
+import Sidebar from '@/components/admin/Sidebar';
+import React from 'react';
 
-export default function AdminLayout({ children }) {
+const layout = () => {
   return (
-    <html>
-      <body>
-        <div style={{ display: 'flex' }}>
-          <AdminSidebar />
-          <main style={{ flex: 1 }}>{children}</main>
-        </div>
-      </body>
-    </html>
-  )
-}
+    <div className='grid grid-cols-9'>
+      <div className='grid-cols-1'>
+        <Sidebar/>
+      </div>
+      <div className='col-span-8'>
+        <h1>Contenty</h1>
+      </div>
+    </div>
+  );
+};
+
+export default layout;
