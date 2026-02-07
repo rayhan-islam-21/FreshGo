@@ -1,9 +1,10 @@
 "use client"
+import AdminHeader from '@/components/admin/AdminHeader';
 import Sidebar from '@/components/admin/Sidebar';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const layout = () => {
+const layout = ({children}) => {
   const isSidebarOpen = useSelector((state)=>state.ui.isSidebarOpen)
   return (
     <div className={`${isSidebarOpen? "grid grid-cols-[260px_1fr]" : "grid grid-cols-[72px_1fr]"} relative mx-auto`}>
@@ -11,7 +12,8 @@ const layout = () => {
         <Sidebar/>
       </div>
       <div className=' bg-blue-600'>
-        <h1>Contenty</h1>
+        <AdminHeader/>
+        {children}
       </div>
     </div>
   );

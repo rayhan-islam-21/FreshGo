@@ -92,9 +92,6 @@ export const sidebarLinks = [
 const Sidebar = () => {
   const dispatch = useDispatch();
   const isSidebarOpen = useSelector((state) => state.ui.isSidebarOpen);
-  useEffect(() => {
-    console.log(isSidebarOpen);
-  }, [dispatch, isSidebarOpen]);
 
   return (
     <div className="w-full  overflow-hidden p-3 ">
@@ -134,7 +131,9 @@ const Sidebar = () => {
                     {side.category}
                   </h1>
                 )}
-                <div className={`flex  flex-col ${isSidebarOpen  ? "gap-2" : "gap-2.5"}`}>
+                <div
+                  className={`flex  flex-col ${isSidebarOpen ? "gap-2" : "gap-2.5"}`}
+                >
                   {side.items.map((links) => {
                     return (
                       <Link
