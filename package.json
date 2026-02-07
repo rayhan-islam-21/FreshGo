@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.19.2",
+    "@radix-ui/react-toggle": "^1.1.10",
     "@reduxjs/toolkit": "^2.11.2",
     "axios": "^1.13.4",
     "class-variance-authority": "^0.7.1",
