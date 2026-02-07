@@ -1,8 +1,11 @@
-export default function AdminHome() {
+import React from 'react';
+
+const page = () => {
   return (
-    <section>
-      <h2>Admin Dashboard</h2>
-      <p>Placeholder admin home.</p>
-    </section>
-  )
-}
+    <div>
+      
+    </div>
+  );
+};
+
+export default page;

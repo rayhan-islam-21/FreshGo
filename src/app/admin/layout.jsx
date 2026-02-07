@@ -11,7 +11,7 @@ const layout = ({children}) => {
       <div className=''>
         <Sidebar/>
       </div>
-      <div className=' bg-blue-600'>
+      <div className=''>
         <AdminHeader/>
         {children}
       </div>
