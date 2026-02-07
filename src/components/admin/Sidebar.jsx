@@ -100,22 +100,27 @@ const Sidebar = () => {
     <div className="w-full  overflow-hidden p-3 ">
       {/* logo and bar  */}
       <div className="flex items-center mb-3 justify-between p-3">
-        <Link href="/" className={`flex ${!isSidebarOpen && 'hidden'} items-center justify-center gap-1`}>
+        <Link
+          href="/"
+          className={`flex ${!isSidebarOpen && "hidden"} items-center justify-center gap-1`}
+        >
           <Image src="/nav-logo.png" alt="logo" width={20} height={20} />
           <h2 className="text-lg text-[#4EA674] font-semibold ">FreshGo</h2>
         </Link>
         <div>
-          {
-            isSidebarOpen ?  <GoSidebarExpand
-            size={20}
-            className="cursor-pointer text-green-600"
-            onClick={() => dispatch(toggleSidebar())}
-          /> : <GoSidebarCollapse
-            size={20}
-            className="cursor-pointer text-green-600"
-            onClick={() => dispatch(toggleSidebar())}
-          />
-          }
+          {isSidebarOpen ? (
+            <GoSidebarExpand
+              size={20}
+              className="cursor-pointer text-green-600"
+              onClick={() => dispatch(toggleSidebar())}
+            />
+          ) : (
+            <GoSidebarCollapse
+              size={20}
+              className="cursor-pointer text-green-600"
+              onClick={() => dispatch(toggleSidebar())}
+            />
+          )}
         </div>
       </div>
       {/* links */}
@@ -124,8 +129,12 @@ const Sidebar = () => {
           {sidebarLinks.map((side) => {
             return (
               <div className=" flex flex-col gap-0.5 mt-1 " key={side.category}>
-                <h1 className="text-sm text-start px-3    py-2 text-gray-800 ">{`${side.category}`}</h1>
-                <div>
+                {isSidebarOpen && (
+                  <h1 className="text-sm text-start font-semibold px-3 py-2 text-gray-500">
+                    {side.category}
+                  </h1>
+                )}
+                <div className={`flex  flex-col ${isSidebarOpen  ? "gap-2" : "gap-2.5"}`}>
                   {side.items.map((links) => {
                     return (
                       <Link
@@ -133,9 +142,12 @@ const Sidebar = () => {
                         className=""
                         key={links.name}
                       >
-                        <div className="flex  items-center justify-start gap-2  hover:bg-[#4EA674] hover:text-[#FFFFFF] p-2.5 rounded-sm bg-[#FFFFFF]">
+                        <div
+                          className={`flex items-center p-2.5 rounded-sm hover:bg-[#4EA674] hover:text-white
+  ${isSidebarOpen ? "gap-2 justify-start" : "justify-center"}`}
+                        >
                           <div>{links.icon}</div>
-                         {isSidebarOpen && <h2>{links.name}</h2>}
+                          {isSidebarOpen && <h2>{links.name}</h2>}
                         </div>
                       </Link>
                     );
