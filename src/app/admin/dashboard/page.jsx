@@ -3,6 +3,7 @@
 import AdminCard from "@/components/admin/AdminCard";
 import WeeklyReportDashboard from "@/components/admin/Charts";
 import DashboardTransition from "@/components/admin/DashboardTransition";
+import TopProducts from "@/components/admin/SideProducts";
 import UserCharts from "@/components/admin/UserCharts";
 import React from "react";
 
@@ -38,8 +39,8 @@ const Page = () => {
         </div>
 
         {/* Right Sidebar */}
-        <div className="lg:col-span-1">
-          <div className="shadow-sm rounded-xl p-4 ">
+        <div className="lg:col-span-1 ">
+          <div className="shadow-sm row-span-1 rounded-xl p-4 ">
             <p className="text-sm text-gray-500">
               Users in last 30 minutes
             </p>
@@ -50,6 +51,7 @@ const Page = () => {
             </div>
           </div>
         </div>
+        <TopProducts/>
       </div>
       {/* transition */}
       <div className="px-5 grid grid-cols-5 mt-8">

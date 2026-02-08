@@ -25,18 +25,11 @@ const DashboardTransition = () => {
       {/* --- Section Header --- */}
       <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100">
         <div>
-          <h1 className="text-xl font-bold text-gray-900 tracking-tight">Transactions</h1>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Transactions</h1>
           <p className="text-xs text-gray-500 font-medium">Monitoring your latest store activity</p>
         </div>
         
         <div className="flex items-center gap-2">
-           <div className="relative group hidden md:block">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-400 group-focus-within:text-gray-900 transition-colors" />
-            <input 
-              placeholder="Search..." 
-              className="pl-9 pr-4 py-2 bg-gray-50 border-none rounded-lg text-sm focus:ring-1 focus:ring-gray-200 outline-none w-48 transition-all"
-            />
-          </div>
           <Button variant="outline" className="h-9 rounded-lg border-gray-200 text-gray-600 hover:bg-gray-50 gap-2 font-semibold">
             <Filter className="h-4 w-4" />
             Filter
@@ -47,7 +40,7 @@ const DashboardTransition = () => {
       {/* --- Table Section --- */}
       <div className="overflow-x-auto">
         <Table>
-          <TableHeader className="bg-gray-50/50">
+          <TableHeader className="bg-gray-200/50">
             <TableRow className="hover:bg-transparent border-b border-gray-100">
               <TableHead className="w-16 text-center font-bold text-gray-400 text-xs uppercase tracking-wider">No</TableHead>
               <TableHead className="font-bold text-gray-700">Customer Id</TableHead>
