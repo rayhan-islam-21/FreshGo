@@ -8,9 +8,10 @@ const page = () => {
   return (
     <>
       <Header />
-      <Hero/>
-      <BelowHero/>
-      <PopularCategory/>
+      <Hero />
+      <BelowHero />
+      <PopularCategory />
+    
     </>
   );
 };
