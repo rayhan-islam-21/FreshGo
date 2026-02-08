@@ -32,7 +32,7 @@ const products = [
 
 const TopProducts = () => {
   return (
-    <div className="w-full max-w-96  border border-gray-100 rounded-lg px-5 py-5 shadow-sm">
+    <div className="w-full max-w-96  border border-t-0 rounded-tl-none rounded-tr-none border-gray-200 rounded-lg px-5 py-5 shadow-sm">
       {/* Header Area */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-bold  tracking-tight">
@@ -40,7 +40,7 @@ const TopProducts = () => {
         </h2>
         <Link
           href="/all-products"
-          className="text-xs font-semibold text-indigo-500 hover:text-indigo-600 transition-colors"
+          className="text-xs font-semibold text-green-500 hover:text-green-600 transition-colors"
         >
           All product
         </Link>

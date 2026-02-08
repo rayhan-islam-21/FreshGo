@@ -54,6 +54,7 @@ const UserCharts = () => {
       style={{ width: '100%', maxWidth: '300px', maxHeight: '100px', aspectRatio: 1.618 }}
       responsive
       data={data}
+      
     >
       <Bar dataKey="uv" fill="#C1E6BA" />
       <RechartsDevtools />

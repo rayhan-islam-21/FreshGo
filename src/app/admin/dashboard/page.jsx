@@ -32,37 +32,29 @@ const Page = () => {
       </div>
 
       {/* Main Dashboard */}
-      <div className="mt-10 grid grid-cols-1 lg:grid-cols-4 gap-6 px-5">
+      <div className="mt-10 grid grid-cols-1 py-3  lg:grid-cols-4 gap-6 px-5">
         {/* Chart Section */}
         <div className="lg:col-span-3">
           <WeeklyReportDashboard />
         </div>
 
         {/* Right Sidebar */}
-        <div className="lg:col-span-1 ">
-          <div className="shadow-sm row-span-1 rounded-xl p-4 ">
-            <p className="text-sm text-gray-500">
-              Users in last 30 minutes
-            </p>
+        <div className="lg:col-span-1 flex flex-col  ">
+          <div className="shadow-sm row-span-1 rounded-xl p-4 border rounded-br-none rounded-bl-none border-b-0 border-gray-200 ">
+            <p className="text-sm text-gray-500">Users in last 30 minutes</p>
             <h1 className="text-2xl font-bold mt-1">21.5k</h1>
 
             <div className="mt-4">
               <UserCharts />
             </div>
           </div>
+          <TopProducts />
         </div>
-        <TopProducts/>
       </div>
       {/* transition */}
-      <div className="px-5 grid grid-cols-5 mt-8">
-       <div className="col-span-4">
-         <DashboardTransition/>
-       </div>
-       <div className="col-span-1">
-        <h1>Rayhan</h1>
-       </div>
+      <div className="px-5  mt-8">
+        <DashboardTransition />
       </div>
-
     </div>
   );
 };

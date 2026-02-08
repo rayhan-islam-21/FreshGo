@@ -25,12 +25,12 @@ const DashboardTransition = () => {
       {/* --- Section Header --- */}
       <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Transactions</h1>
+          <h1 className="text-2xl font-bold  tracking-tight">Transactions</h1>
           <p className="text-xs text-gray-500 font-medium">Monitoring your latest store activity</p>
         </div>
         
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="h-9 rounded-lg border-gray-200 text-gray-600 hover:bg-gray-50 gap-2 font-semibold">
+          <Button variant="outline" className="h-9 rounded-lg border-gray-200  hover:bg-gray-50 gap-2 font-semibold">
             <Filter className="h-4 w-4" />
             Filter
           </Button>
@@ -42,11 +42,11 @@ const DashboardTransition = () => {
         <Table>
           <TableHeader className="bg-gray-200/50">
             <TableRow className="hover:bg-transparent border-b border-gray-100">
-              <TableHead className="w-16 text-center font-bold text-gray-400 text-xs uppercase tracking-wider">No</TableHead>
-              <TableHead className="font-bold text-gray-700">Customer Id</TableHead>
-              <TableHead className="font-bold text-gray-700">Order Date</TableHead>
-              <TableHead className="font-bold text-gray-700">Status</TableHead>
-              <TableHead className="text-right font-bold text-gray-700 pr-8">Amount</TableHead>
+              <TableHead className="w-16 text-center font-bold  text-xs uppercase tracking-wider">No</TableHead>
+              <TableHead className="font-bold ">Customer Id</TableHead>
+              <TableHead className="font-bold ">Order Date</TableHead>
+              <TableHead className="font-bold ">Status</TableHead>
+              <TableHead className="text-right font-bold  pr-8">Amount</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -68,7 +68,7 @@ const DashboardTransition = () => {
                   </span>
                 </TableCell>
                 <TableCell className="text-right pr-8">
-                  <span className="font-bold text-gray-900">{t.amount}</span>
+                  <span className="font-bold ">{t.amount}</span>
                 </TableCell>
               </TableRow>
             ))}
@@ -77,10 +77,10 @@ const DashboardTransition = () => {
       </div>
 
       {/* --- Footer Action --- */}
-      <div className="p-4 bg-gray-50/30 border-t border-gray-100 flex justify-center sm:justify-end">
+      <div className="p-4 border-t border-gray-100 flex justify-center sm:justify-end">
         <Link 
           href="/details" 
-          className="group flex items-center gap-1.5 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-all"
+          className="group flex items-center gap-1.5 text-sm font-bold text-green-600 hover:text-green-700 transition-all"
         >
           View Detailed Analytics
           <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
