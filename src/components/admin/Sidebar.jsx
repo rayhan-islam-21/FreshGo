@@ -108,7 +108,7 @@ const Sidebar = () => {
   const isSidebarOpen = useSelector((state) => state.ui.isSidebarOpen);
 
   return (
-    <div className="w-full  overflow-hidden p-3 border-r border-r-gray-200/90 ">
+    <div className="w-full  overflow-hidden p-3 border-r border-r-gray-200/30 ">
       {/* logo and bar  */}
       <div className="flex items-center mb-3 justify-between p-3">
         <Link

@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
     <div className="min-h-screen  transition-colors duration-300">
       <div className={`${isSidebarOpen ? "grid grid-cols-[260px_1fr]" : "grid grid-cols-[72px_1fr]"}`}>
         <Sidebar className="bg-gray-100 dark:bg-zinc-800" />
-        <div className="p-4">
+        <div className="">
           <AdminHeader />
           {children}
         </div>

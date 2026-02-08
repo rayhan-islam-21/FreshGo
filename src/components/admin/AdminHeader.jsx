@@ -8,7 +8,7 @@ import DarkModeToggle from "../themes/DarkModeToggle";
 
 const AdminHeader = () => {
   return (
-   <header className="flex items-center justify-between">
+   <header className="flex items-center justify-between border-b border-b-gray-200/20 px-3 py-5">
 
       <div>
         <h1 className="text-lg font-semibold">Dashboard</h1>
