@@ -1,26 +1,38 @@
-import { DollarSign } from "lucide-react";
+
 import { Button } from "../ui/button";
+import { TbCurrencyTaka } from "react-icons/tb";
+
 
 const AdminCard = ({ title, stats, previous, onDetailsClick }) => {
   return (
-    <article className=" shadow rounded-lg p-4 flex flex-col justify-between w-full max-w-sm">
+    <article className="shadow-sm  rounded-lg p-4 flex flex-col justify-between w-full max-w-sm">
       <header className="mb-2">
         <h3 className="text-lg font-semibold">{title}</h3>
         <p className="text-sm text-gray-500">Last 7 days</p>
       </header>
 
       <section className="mb-2">
-        <h1 className="text-2xl font-bold">{stats.amount}</h1>
-        <p className={`text-sm ${stats.percentage > 0 ? "text-green-500" : "text-red-500"}`}>
-          {stats.action} ({stats.percentage}%)
-        </p>
+        <h1 className="text-2xl flex items-center  font-bold">{previous.currency === "৳" && <TbCurrencyTaka/> } <span className="-order-1">{stats.amount}</span></h1>
+        {stats.percentage !== undefined && stats.action && (
+          <p
+            className={`text-sm ${
+              stats.percentage > 0 ? "text-green-500" : "text-red-500"
+            }`}
+          >
+            {stats.action} ({stats.percentage}%)
+          </p>
+        )}
       </section>
 
       <footer className="flex justify-between items-center mt-4">
-        <p className="text-sm text-gray-500">
-          Previous 7 days: <DollarSign className="inline w-4 h-4" /> {previous.amount}
+        <p className="text-sm text-gray-700">
+          Previous 7 days:{" "}
+          {previous.currency === "৳" ? (
+            <TbCurrencyTaka size={30} className="inline w-5 h-5" />
+          ) : null}
+          {previous.amount}
         </p>
-        <Button onClick={onDetailsClick} variant="outline" size="lg">
+        <Button className="border-none text-white hover:scale-101 bg-[#4EA674]" variant="secondary" size="lg">
           Details
         </Button>
       </footer>
