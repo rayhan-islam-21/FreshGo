@@ -7,10 +7,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Filter, ChevronRight } from "lucide-react";
+import { Button } from "../ui/button";
+import { Filter, ArrowUpRight, Search, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge"; // Recommended: shadcn Badge component
 
 const transactions = [
   { no: "1.", id: "#6545", date: "01 Oct | 11:29 am", status: "Paid", amount: "$64" },
@@ -22,50 +21,61 @@ const transactions = [
 
 const DashboardTransition = () => {
   return (
-    <div className="w-full px-6 py-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-      {/* Header Section */}
-      <div className="flex items-center justify-between mb-6">
+    <div className="w-full  border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+      {/* --- Section Header --- */}
+      <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100">
         <div>
-          <h1 className="text-xl font-bold text-gray-800">Transactions</h1>
-          <p className="text-sm text-muted-foreground">Recent activity from your store</p>
+          <h1 className="text-xl font-bold text-gray-900 tracking-tight">Transactions</h1>
+          <p className="text-xs text-gray-500 font-medium">Monitoring your latest store activity</p>
         </div>
-        <Button variant="outline" size="sm" className="gap-2 border-gray-200 hover:bg-gray-50">
-          <Filter className="w-4 h-4" />
-          Filter
-        </Button>
+        
+        <div className="flex items-center gap-2">
+           <div className="relative group hidden md:block">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-400 group-focus-within:text-gray-900 transition-colors" />
+            <input 
+              placeholder="Search..." 
+              className="pl-9 pr-4 py-2 bg-gray-50 border-none rounded-lg text-sm focus:ring-1 focus:ring-gray-200 outline-none w-48 transition-all"
+            />
+          </div>
+          <Button variant="outline" className="h-9 rounded-lg border-gray-200 text-gray-600 hover:bg-gray-50 gap-2 font-semibold">
+            <Filter className="h-4 w-4" />
+            Filter
+          </Button>
+        </div>
       </div>
 
-      {/* Table Section */}
-      <div className="rounded-md border">
+      {/* --- Table Section --- */}
+      <div className="overflow-x-auto">
         <Table>
           <TableHeader className="bg-gray-50/50">
-            <TableRow>
-              <TableHead className="w-[60px]">No</TableHead>
-              <TableHead>Customer Id</TableHead>
-              <TableHead>Order Date</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+            <TableRow className="hover:bg-transparent border-b border-gray-100">
+              <TableHead className="w-16 text-center font-bold text-gray-400 text-xs uppercase tracking-wider">No</TableHead>
+              <TableHead className="font-bold text-gray-700">Customer Id</TableHead>
+              <TableHead className="font-bold text-gray-700">Order Date</TableHead>
+              <TableHead className="font-bold text-gray-700">Status</TableHead>
+              <TableHead className="text-right font-bold text-gray-700 pr-8">Amount</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {transactions.map((t) => (
-              <TableRow key={t.no} className="hover:bg-gray-50/50 transition-colors">
-                <TableCell className="font-medium text-gray-500">{t.no}</TableCell>
-                <TableCell className="font-semibold text-gray-700">{t.id}</TableCell>
-                <TableCell className="text-gray-600">{t.date}</TableCell>
+              <TableRow key={t.no} className="group hover:bg-slate-50/50 transition-colors cursor-default border-b border-gray-50 last:border-0">
+                <TableCell className="text-center font-medium text-gray-400">{t.no}</TableCell>
+                <TableCell className="font-mono text-sm font-semibold text-gray-600">{t.id}</TableCell>
+                <TableCell className="text-sm text-gray-500">{t.date}</TableCell>
                 <TableCell>
                   <span
-                    className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wide border ${
                       t.status === "Paid"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-amber-100 text-amber-700"
+                        ? "bg-emerald-50 text-emerald-700 border-emerald-100"
+                        : "bg-amber-50 text-amber-700 border-amber-100"
                     }`}
                   >
+                    <span className={`mr-1.5 h-1.5 w-1.5 rounded-full ${t.status === "Paid" ? "bg-emerald-500" : "bg-amber-500"}`} />
                     {t.status}
                   </span>
                 </TableCell>
-                <TableCell className="text-right font-bold text-gray-900">
-                  {t.amount}
+                <TableCell className="text-right pr-8">
+                  <span className="font-bold text-gray-900">{t.amount}</span>
                 </TableCell>
               </TableRow>
             ))}
@@ -73,14 +83,14 @@ const DashboardTransition = () => {
         </Table>
       </div>
 
-      {/* Footer / View All */}
-      <div className="mt-4 flex justify-end">
+      {/* --- Footer Action --- */}
+      <div className="p-4 bg-gray-50/30 border-t border-gray-100 flex justify-center sm:justify-end">
         <Link 
           href="/details" 
-          className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-all hover:underline"
+          className="group flex items-center gap-1.5 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-all"
         >
-          View all transactions
-          <ChevronRight className="w-4 h-4" />
+          View Detailed Analytics
+          <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </Link>
       </div>
     </div>

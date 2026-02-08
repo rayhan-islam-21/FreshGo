@@ -52,8 +52,13 @@ const Page = () => {
         </div>
       </div>
       {/* transition */}
-      <div className="px-5 mt-8">
-        <DashboardTransition/>
+      <div className="px-5 grid grid-cols-5 mt-8">
+       <div className="col-span-4">
+         <DashboardTransition/>
+       </div>
+       <div className="col-span-1">
+        <h1>Rayhan</h1>
+       </div>
       </div>
 
     </div>
