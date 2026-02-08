@@ -2,15 +2,13 @@
 
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
+import { Sun, Moon } from "lucide-react"
 
 export default function DarkModeToggle() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
+  useEffect(() => setMounted(true), [])
   if (!mounted) return null
 
   const isDark = theme === "dark"
@@ -19,15 +17,22 @@ export default function DarkModeToggle() {
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label="Toggle dark mode"
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-        isDark ? "bg-zinc-800" : "bg-zinc-100"
+      className={`relative w-14 h-7 rounded-full transition-colors duration-300 ${
+        isDark ? "bg-zinc-800" : "bg-yellow-300"
       }`}
     >
+      {/* Sliding thumb with icon */}
       <span
-        className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
-          isDark ? "translate-x-5" : "translate-x-1"
+        className={`absolute top-0.5 left-0.5 flex items-center justify-center w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-300 ${
+          isDark ? "translate-x-7" : "translate-x-0"
         }`}
-      />
+      >
+        {isDark ? (
+          <Moon className="w-4 h-4 text-gray-800" />
+        ) : (
+          <Sun className="w-4 h-4 text-yellow-500" />
+        )}
+      </span>
     </button>
   )
 }
