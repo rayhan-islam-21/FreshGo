@@ -2,6 +2,7 @@
 
 import AdminCard from "@/components/admin/AdminCard";
 import WeeklyReportDashboard from "@/components/admin/Charts";
+import DashboardTransition from "@/components/admin/DashboardTransition";
 import UserCharts from "@/components/admin/UserCharts";
 import React from "react";
 
@@ -50,6 +51,11 @@ const Page = () => {
           </div>
         </div>
       </div>
+      {/* transition */}
+      <div className="px-5 mt-8">
+        <DashboardTransition/>
+      </div>
+
     </div>
   );
 };

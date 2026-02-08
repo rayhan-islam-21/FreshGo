@@ -55,7 +55,7 @@ const UserCharts = () => {
       responsive
       data={data}
     >
-      <Bar dataKey="uv" fill="#8884d8" />
+      <Bar dataKey="uv" fill="#C1E6BA" />
       <RechartsDevtools />
     </BarChart>
   );
