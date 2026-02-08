@@ -51,11 +51,11 @@ export default function WeeklyReportDashboard() {
   const [weekFilter, setWeekFilter] = useState("This week");
 
   return (
-    <div className="w-full max-w-5xl p-8 bg-white rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 font-sans">
+    <div className="w-full max-w-5xl p-8  rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 font-sans">
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+          <h2 className="text-2xl font-bold  tracking-tight">
             Weekly Performance
           </h2>
           <p className="text-gray-500 text-sm mt-1">

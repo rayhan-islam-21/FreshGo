@@ -1,42 +1,57 @@
 "use client";
+
 import AdminCard from "@/components/admin/AdminCard";
 import WeeklyReportDashboard from "@/components/admin/Charts";
+import UserCharts from "@/components/admin/UserCharts";
 import React from "react";
 
-const page = () => {
+const Page = () => {
   return (
-    <div>
-        <div className="flex items-center justify-between gap-12 px-5 mt-4">
-      <AdminCard
-        title="Revenue"
-        stats={{ amount: 12000, action: "Up", percentage: 12 }}
-        previous={{ amount: 10000, currency: "৳" }}
-      />
+    <div className="w-full">
+      {/* Top Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-5 mt-4">
+        <AdminCard
+          title="Revenue"
+          stats={{ amount: 12000, action: "Up", percentage: 12 }}
+          previous={{ amount: 10000, currency: "৳" }}
+        />
 
-      <AdminCard
-        title="Orders"
-        stats={{ amount: 320, action: "Down", percentage: -8 }}
-        previous={{ amount: 350 }}
-      />
-      <AdminCard
-        title="Orders"
-        stats={{ amount: 320, action: "Up", percentage: 10 }}
-        previous={{ amount: 350 }}
-      />
-    </div>
+        <AdminCard
+          title="Orders"
+          stats={{ amount: 320, action: "Down", percentage: -8 }}
+          previous={{ amount: 350 }}
+        />
 
-    <div className="mt-12 grid grid-cols-4  h-screen overflow-hidden px-5">
-      <div className="col-span-3">
-        <WeeklyReportDashboard/>
+        <AdminCard
+          title="Customers"
+          stats={{ amount: 1500, action: "Up", percentage: 10 }}
+          previous={{ amount: 1350 }}
+        />
       </div>
-      <div className="col-span-1" 
-      >
-        <h1>Rayhan</h1>
+
+      {/* Main Dashboard */}
+      <div className="mt-10 grid grid-cols-1 lg:grid-cols-4 gap-6 px-5">
+        {/* Chart Section */}
+        <div className="lg:col-span-3">
+          <WeeklyReportDashboard />
+        </div>
+
+        {/* Right Sidebar */}
+        <div className="lg:col-span-1">
+          <div className="shadow-sm rounded-xl p-4 ">
+            <p className="text-sm text-gray-500">
+              Users in last 30 minutes
+            </p>
+            <h1 className="text-2xl font-bold mt-1">21.5k</h1>
+
+            <div className="mt-4">
+              <UserCharts />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    
     </div>
   );
 };
 
-export default page;
+export default Page;
