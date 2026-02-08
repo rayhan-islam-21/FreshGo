@@ -32,7 +32,7 @@ const AdminCard = ({ title, stats, previous, onDetailsClick }) => {
           ) : null}
           {previous.amount}
         </p>
-        <Button className="border-none text-white hover:scale-101 bg-[#4EA674]" variant="secondary" size="lg">
+        <Button className="border-none text-gray-600 hover:scale-101 bg-[#C1E6BA]" variant="secondary" size="sm">
           Details
         </Button>
       </footer>
