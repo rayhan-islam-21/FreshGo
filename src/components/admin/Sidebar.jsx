@@ -29,23 +29,35 @@ export const sidebarLinks = [
     items: [
       {
         name: "Dashboard",
-        slug: "/dashboard",
+        slug: "/admin/dashboard",
         icon: <LuLayoutDashboard size={20} />,
       },
       {
         name: "Order Management",
-        slug: "/orders",
+        slug: "/admin/orders",
         icon: <LuShoppingCart size={20} />,
       },
-      { name: "Customers", slug: "/customers", icon: <LuUsers size={20} /> },
-      { name: "Coupon Code", slug: "/coupons", icon: <LuTicket size={20} /> },
-      { name: "Categories", slug: "/categories", icon: <LuLayers size={20} /> },
+      {
+        name: "Customers",
+        slug: "/admin/customers",
+        icon: <LuUsers size={20} />,
+      },
+      {
+        name: "Coupon Code",
+        slug: "/admin/coupons",
+        icon: <LuTicket size={20} />,
+      },
+      {
+        name: "Categories",
+        slug: "/admin/categories",
+        icon: <LuLayers size={20} />,
+      },
       {
         name: "Transaction",
-        slug: "/transactions",
+        slug: "/admin/transactions",
         icon: <LuWallet size={20} />,
       },
-      { name: "Brand", slug: "/brands", icon: <LuStar size={20} /> },
+      { name: "Brand", slug: "/admin/brands", icon: <LuStar size={20} /> },
     ],
   },
   {
@@ -53,22 +65,22 @@ export const sidebarLinks = [
     items: [
       {
         name: "Add Products",
-        slug: "/products/add",
+        slug: "/admin/products/add",
         icon: <LuPlus size={20} />,
       },
       {
         name: "Product Media",
-        slug: "/products/media",
+        slug: "/admin/products/media",
         icon: <LuImage size={20} />,
       },
       {
         name: "Product List",
-        slug: "/products/list",
+        slug: "/admin/products/list",
         icon: <LuPackage size={20} />,
       },
       {
         name: "Product Reviews",
-        slug: "/products/reviews",
+        slug: "/admin/products/reviews",
         icon: <LuMessageSquare size={20} />,
       },
     ],
@@ -94,10 +106,9 @@ const Sidebar = () => {
   const pathName = usePathname();
   const dispatch = useDispatch();
   const isSidebarOpen = useSelector((state) => state.ui.isSidebarOpen);
-  console.log(pathName)
 
   return (
-    <div className="w-full  overflow-hidden p-3 ">
+    <div className="w-full  overflow-hidden p-3 border-r border-r-gray-200/90 ">
       {/* logo and bar  */}
       <div className="flex items-center mb-3 justify-between p-3">
         <Link
@@ -145,7 +156,7 @@ const Sidebar = () => {
                         key={links.name}
                       >
                         <div
-                          className={`flex items-center p-2.5 rounded-sm hover:bg-[#4EA674] hover:text-white
+                          className={`flex items-center p-2.5 rounded-sm ${pathName === links.slug ? "bg-[#4EA674] text-white" :"hover:bg-[#cdcecd] hover:text-white"} 
   ${isSidebarOpen ? "gap-2 justify-start" : "justify-center"}`}
                         >
                           <div>{links.icon}</div>
