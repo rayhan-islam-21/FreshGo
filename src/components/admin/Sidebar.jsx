@@ -21,6 +21,7 @@ import {
   LuShieldCheck,
   LuPlus,
 } from "react-icons/lu";
+import { usePathname } from "next/navigation";
 
 export const sidebarLinks = [
   {
@@ -90,8 +91,10 @@ export const sidebarLinks = [
 ];
 
 const Sidebar = () => {
+  const pathName = usePathname();
   const dispatch = useDispatch();
   const isSidebarOpen = useSelector((state) => state.ui.isSidebarOpen);
+  console.log(pathName)
 
   return (
     <div className="w-full  overflow-hidden p-3 ">
