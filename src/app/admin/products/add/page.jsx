@@ -29,10 +29,13 @@ import {
 } from "lucide-react";
 import { TbCoinTakaFilled } from "react-icons/tb";
 import Image from "next/image";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddProductPage = () => {
   const [images, setImages] = useState([]);
   const [mainPreviewIndex, setMainPreviewIndex] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
 
   const {
     register,
@@ -42,7 +45,7 @@ const AddProductPage = () => {
     formState: { isSubmitting, errors },
   } = useForm({
     defaultValues: {
-      status: "active",
+      name: "",
       category: "",
       tag: "",
       unlimited: false,
@@ -51,9 +54,13 @@ const AddProductPage = () => {
     },
   });
 
+  const notify = () => toast('Here is your toast.');
+
+
   const price = watch("price");
   const discount = watch("discount");
   const isUnlimited = watch("unlimited");
+  const name = watch("name");
   const [finalPrice, setFinalPrice] = useState(0);
 
   // Calculate Final Price
@@ -71,13 +78,40 @@ const AddProductPage = () => {
     alert("Product Published! Check console for data.");
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const files = Array.from(e.target.files);
-    if (files.length > 0) {
-      const newPreviews = files.map((file) => URL.createObjectURL(file));
-      setImages((prev) => [...prev, ...newPreviews]);
+    if (files.length === 0) return;
+    setIsUploading(true);
+    try {
+      const uploadPromies = files.map((file) => uploadToCloudinary(file));
+      const uploadUrls = await Promise.all(uploadPromies);
+      setImages((prev) => [...prev, ...uploadUrls]);
+    } catch (error) {
+      console.error("Cloudinary Upload Error:", error);
+      notify();
+    }finally{
+      setIsUploading(false);
     }
   };
+
+  useEffect(() => {
+    if (name) {
+      // 1. Clean the name
+      const baseSlug = name
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-");
+      const currentSlug = watch("slug");
+      const existingId = currentSlug?.split("-").pop();
+      const isFourDigits = /^\d{4}$/.test(existingId);
+
+      const uniqueId = isFourDigits
+        ? existingId
+        : Date.now().toString().slice(-4);
+
+      setValue("slug", `${baseSlug}-${uniqueId}`, { shouldValidate: true });
+    }
+  }, [name, setValue, watch]);
 
   const removeImage = (index) => {
     const filtered = images.filter((_, i) => i !== index);
@@ -85,10 +119,24 @@ const AddProductPage = () => {
     if (mainPreviewIndex >= filtered.length) setMainPreviewIndex(0);
   };
 
+  const uploadToCloudinary = async (file) => {
+    const formdata = new FormData();
+    formdata.append("file", file);
+    formdata.append("upload_preset", "freshgo");
+
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/dnrubj8x4/image/upload",
+      formdata,
+    );
+    const data = response.data;
+    return data.secure_url;
+  };
+
   return (
-    <div className="min-h-screen p-6 md:p-10 bg-slate-50/30">
+    <div className="min-h-screen p-6 md:p-10 ">
+      <Toaster/>
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6 max-w-[1200px] mx-auto">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6 max-w-300 mx-auto">
         <div>
           <h1 className="text-3xl font-black tracking-tight">Create Product</h1>
           <p className="text-slate-500 font-medium mt-1">
@@ -111,11 +159,11 @@ const AddProductPage = () => {
       <form
         id="product-form"
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-1 xl:grid-cols-3 gap-8 max-w-[1200px] mx-auto"
+        className="grid grid-cols-1 xl:grid-cols-3 gap-8 max-w-300 mx-auto"
       >
         {/* Left Column: Core Details */}
         <div className="xl:col-span-2 space-y-8">
-          <Card className="border-none shadow-sm rounded-lg overflow-hidden bg-white">
+          <Card className="border-none shadow-sm rounded-lg overflow-hidden ">
             <CardHeader className="px-8 pt-8 pb-4">
               <CardTitle className="text-xl font-bold flex items-center gap-2">
                 <div className="p-2 bg-green-50 rounded-lg">
@@ -190,7 +238,7 @@ const AddProductPage = () => {
           </Card>
 
           {/* Pricing & Stock Card */}
-          <Card className="border-none shadow-sm rounded-lg overflow-hidden bg-white">
+          <Card className="border-none shadow-sm rounded-lg overflow-hidden ">
             <CardHeader className="px-8 pt-8 pb-4">
               <CardTitle className="text-xl font-bold flex items-center gap-2">
                 <div className="p-2 bg-emerald-50 rounded-lg">
@@ -297,7 +345,7 @@ const AddProductPage = () => {
 
         {/* Right Column: Media & Selectors */}
         <div className="space-y-8">
-          <Card className="border-none shadow-sm rounded-lg overflow-hidden bg-white">
+          <Card className="border-none shadow-sm rounded-lg overflow-hidden ">
             <CardHeader className="px-6 py-5 border-b border-slate-50 flex flex-row items-center justify-between">
               <CardTitle className="text-lg font-bold flex items-center gap-2">
                 <Camera className="h-5 w-5 text-indigo-500" /> Media
@@ -332,7 +380,7 @@ const AddProductPage = () => {
                           size="sm"
                           variant="secondary"
                           onClick={() => removeImage(mainPreviewIndex)}
-                          className="h-9 px-4 rounded-xl bg-white shadow-xl text-red-500 border-none hover:bg-red-50"
+                          className="h-9 px-4 rounded-xl  shadow-xl text-red-500 border-none hover:bg-red-50"
                         >
                           <RotateCcw className="w-3 h-3 mr-1" /> Remove
                         </Button>
@@ -340,7 +388,7 @@ const AddProductPage = () => {
                     </div>
                   ) : (
                     <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer py-10">
-                      <div className="p-4 bg-white rounded-2xl shadow-sm mb-4 group-hover:scale-110 transition-transform border border-slate-100">
+                      <div className="p-4  rounded-2xl shadow-sm mb-4 group-hover:scale-110 transition-transform border border-slate-100">
                         <Upload className="h-6 w-6 text-green-500" />
                       </div>
                       <span className="text-sm font-bold text-slate-400">
@@ -407,7 +455,7 @@ const AddProductPage = () => {
                     }
                   >
                     <SelectTrigger
-                      className={`w-full bg-slate-50 border-none rounded-2xl h-14 font-semibold px-5 transition-all ${errors.category ? "ring-1 ring-red-500 bg-red-50/50" : "hover:bg-slate-100"}`}
+                      className={`w-full  border-none rounded-2xl h-14 font-semibold px-5 transition-all ${errors.category ? "ring-1 ring-red-500 bg-red-50/50" : "hover:bg-slate-100"}`}
                     >
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
@@ -416,7 +464,7 @@ const AddProductPage = () => {
                       position="popper"
                       side="bottom"
                       sideOffset={10}
-                      className="rounded-xl bg-white z-50 border-slate-100 shadow-2xl w-[var(--radix-select-trigger-width)]"
+                      className="rounded-xl  z-50 border-slate-100 shadow-2xl w-[var(--radix-select-trigger-width)]"
                     >
                       <SelectGroup>
                         <SelectLabel className="text-[10px] font-black uppercase text-slate-300 px-4 py-2">
@@ -459,37 +507,6 @@ const AddProductPage = () => {
                       {errors.category.message}
                     </p>
                   )}
-                </div>
-
-                {/* Status Selection */}
-                <div className="space-y-2">
-                  <Label className="text-slate-400 font-bold text-[10px] uppercase tracking-widest ml-1">
-                    Visibility Status
-                  </Label>
-                  <Select
-                    defaultValue="active"
-                    onValueChange={(v) => setValue("status", v)}
-                  >
-                    <SelectTrigger className="w-full bg-slate-50 border-none rounded-2xl h-14 font-semibold px-5">
-                      <SelectValue placeholder="Status" />
-                    </SelectTrigger>
-                    <SelectContent
-                      position="popper"
-                      side="bottom"
-                      sideOffset={10}
-                      className="rounded-xl bg-white shadow-2xl w-[var(--radix-select-trigger-width)]"
-                    >
-                      <SelectItem value="active" className="py-3 rounded-md">
-                        🟢 Active / Public
-                      </SelectItem>
-                      <SelectItem value="draft" className="py-3 rounded-md">
-                        🟡 Draft Mode
-                      </SelectItem>
-                      <SelectItem value="archived" className="py-3 rounded-md">
-                        🔴 Archived
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
                 </div>
               </div>
             </CardContent>
