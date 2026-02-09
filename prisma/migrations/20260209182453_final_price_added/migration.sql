@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Product" ADD COLUMN     "finalprice" DOUBLE PRECISION,
+ALTER COLUMN "discount" DROP NOT NULL,
+ALTER COLUMN "stock" DROP NOT NULL;

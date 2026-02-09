@@ -48,7 +48,6 @@ const AddProductPage = () => {
     defaultValues: {
       name: "",
       category: "",
-      tag: "",
       unlimited: false,
       price: 0,
       discount: 0,
@@ -74,7 +73,16 @@ const AddProductPage = () => {
   const onSubmit = async (data) => {
     // Add images to the final data payload
     try {
-      const formData = { ...data, productImages: images, finalPrice };
+      const formData = {
+        ...data,
+        images: images,
+        finalPrice,
+        price: parseFloat(data.price),
+        discount: parseInt(data.discount),
+        stock: parseInt(data.stock),
+        unlimited: !!data.unlimited,
+      };
+
       console.log("Form Submitted Successfully:", formData);
       const product = await api.post("/products", formData);
       console.log(product.data)
@@ -477,10 +485,10 @@ const AddProductPage = () => {
                           Tech
                         </SelectLabel>
                         <SelectItem
-                          value="mobiles"
+                          value="vegetable"
                           className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
                         >
-                         Vegetable
+                          Vegetable
                         </SelectItem>
                         <SelectItem
                           value="laptops"

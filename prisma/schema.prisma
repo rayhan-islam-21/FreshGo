@@ -12,6 +12,7 @@ model Product {
   name String 
   description String
   price Float
+  finalPrice Float?
   discount Int?
   stock Int?
   unlimited Boolean
