@@ -18,7 +18,7 @@ export default function DarkModeToggle() {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label="Toggle dark mode"
       className={`relative w-14 h-7 rounded-full transition-colors duration-300 ${
-        isDark ? "bg-zinc-800" : "bg-yellow-300"
+        isDark ? "bg-zinc-800" : "bg-green-500"
       }`}
     >
       {/* Sliding thumb with icon */}

@@ -31,6 +31,7 @@ import { TbCoinTakaFilled } from "react-icons/tb";
 import Image from "next/image";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { api } from "@/lib/axios";
 
 const AddProductPage = () => {
   const [images, setImages] = useState([]);
@@ -72,9 +73,16 @@ const AddProductPage = () => {
 
   const onSubmit = async (data) => {
     // Add images to the final data payload
-    const formData = { ...data, productImages: images, finalPrice };
-    console.log("Form Submitted Successfully:", formData);
-    alert("Product Published! Check console for data.");
+    try {
+      const formData = { ...data, productImages: images, finalPrice };
+      console.log("Form Submitted Successfully:", formData);
+      const product = await api.post("/products", formData);
+      console.log(product.data)
+      return product.data;
+    } catch (error) {
+      console.log("Failed to submit product:", error);
+      throw error;
+    }
   };
 
   const handleImageChange = async (e) => {
@@ -472,7 +480,7 @@ const AddProductPage = () => {
                           value="mobiles"
                           className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
                         >
-                          Smartphones
+                         Vegetable
                         </SelectItem>
                         <SelectItem
                           value="laptops"
