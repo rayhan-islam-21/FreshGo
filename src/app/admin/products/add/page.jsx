@@ -54,8 +54,7 @@ const AddProductPage = () => {
     },
   });
 
-  const notify = () => toast('Here is your toast.');
-
+  const notify = () => toast("Here is your toast.");
 
   const price = watch("price");
   const discount = watch("discount");
@@ -89,7 +88,7 @@ const AddProductPage = () => {
     } catch (error) {
       console.error("Cloudinary Upload Error:", error);
       notify();
-    }finally{
+    } finally {
       setIsUploading(false);
     }
   };
@@ -134,7 +133,7 @@ const AddProductPage = () => {
 
   return (
     <div className="min-h-screen p-6 md:p-10 ">
-      <Toaster/>
+      <Toaster />
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6 max-w-300 mx-auto">
         <div>
@@ -363,7 +362,6 @@ const AddProductPage = () => {
               )}
             </CardHeader>
             <CardContent className="p-6 space-y-8">
-              {/* Image Upload Area */}
               <div className="space-y-4">
                 <div className="relative border-2 border-dashed border-slate-200 rounded-3xl p-4 flex flex-col items-center justify-center min-h-[260px] bg-slate-50/50 group transition-all hover:border-green-300">
                   {images.length > 0 ? (
@@ -464,7 +462,7 @@ const AddProductPage = () => {
                       position="popper"
                       side="bottom"
                       sideOffset={10}
-                      className="rounded-xl  z-50 border-slate-100 shadow-2xl w-[var(--radix-select-trigger-width)]"
+                      className="rounded-xl  z-50 border-slate-100 bg-white shadow-sm w-[var(--radix-select-trigger-width)]"
                     >
                       <SelectGroup>
                         <SelectLabel className="text-[10px] font-black uppercase text-slate-300 px-4 py-2">

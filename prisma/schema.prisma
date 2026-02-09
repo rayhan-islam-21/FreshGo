@@ -8,13 +8,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Product {
   id String @id @default(uuid())
-  name String
-  email String @unique
-  age Int
-  isMarried Boolean
-  nationality String
+  slug String @unique
+  name String 
+  description String
+  price Float
+  discount Int
+  stock Int
+  unlimited Boolean
+  images String[]
+  category String
   createdAt DateTime @default(now())
-  @@map("users")
+  updatedAt DateTime @updatedAt
+
 }
