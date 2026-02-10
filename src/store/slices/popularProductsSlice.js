@@ -3,33 +3,33 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 export const fetchPopularProducts = createAsyncThunk('popularProducts/fetchPopularProducts',
-    async ()=>{
+    async () => {
         const response = await api.get("/products")
         return response.data;
     }
 )
 
 const popularProductSlice = createSlice({
-    name:"popularProducts",
-    initialState:{
-        items:[],
-        loading:false,
-        error:null
+    name: "popularProducts",
+    initialState: {
+        items: [],
+        loading: false,
+        error: null
     },
-    reducers:{},
-    extraReducers: (builder)=>{
-        builder.addCase(fetchPopularProducts.pending,(state)=>{
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(fetchPopularProducts.pending, (state) => {
             state.loading = true,
-            state.error = null
+                state.error = null
         })
-        .addCase(fetchPopularProducts.fulfilled,(state,action)=>{
-            state.loading = false,
-            state.items = action.payload
-        })
-        .addCase(fetchPopularProducts.rejected,(state,action)=>{
-            state.loading = false,
-            state.error = action.error.message
-        })
+            .addCase(fetchPopularProducts.fulfilled, (state, action) => {
+                state.loading = false,
+                    state.items = action.payload
+            })
+            .addCase(fetchPopularProducts.rejected, (state, action) => {
+                state.loading = false,
+                    state.error = action.error.message
+            })
     }
 })
 
