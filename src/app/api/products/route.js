@@ -12,7 +12,7 @@ export const POST = async (req) => {
         description: data.description,
         category: data.category,
         price: parseFloat(data.price),
-        finalPrice: parseFloat(data.finalPrice),
+        finalprice: parseFloat(data.finalprice),
         discount: data.discount ? parseInt(data.discount) : null,
         stock: data.stock ? parseInt(data.stock) : null,
         unlimited: !!data.unlimited,
@@ -29,3 +29,13 @@ export const POST = async (req) => {
     );
   }
 };
+
+export const GET = async()=>{
+  try {
+    const product = await prisma.product.findMany();
+    return NextResponse.json(product)
+  } catch (error) {
+    return NextResponse.json({error:"failed"})
+  }
+
+}

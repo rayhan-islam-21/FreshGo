@@ -12,7 +12,7 @@ model Product {
   name String 
   description String
   price Float
-  finalPrice Float?
+  finalprice Float
   discount Int?
   stock Int?
   unlimited Boolean
@@ -20,5 +20,4 @@ model Product {
   category String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
 }

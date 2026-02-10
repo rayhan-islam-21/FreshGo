@@ -60,7 +60,7 @@ const AddProductPage = () => {
   const discount = watch("discount");
   const isUnlimited = watch("unlimited");
   const name = watch("name");
-  const [finalPrice, setFinalPrice] = useState(0);
+  const [finalprice, setFinalPrice] = useState(0);
 
   // Calculate Final Price
   useEffect(() => {
@@ -76,7 +76,7 @@ const AddProductPage = () => {
       const formData = {
         ...data,
         images: images,
-        finalPrice,
+        finalprice,
         price: parseFloat(data.price),
         discount: parseInt(data.discount),
         stock: parseInt(data.stock),
@@ -85,7 +85,7 @@ const AddProductPage = () => {
 
       console.log("Form Submitted Successfully:", formData);
       const product = await api.post("/products", formData);
-      console.log(product.data)
+      console.log(product.data);
       return product.data;
     } catch (error) {
       console.log("Failed to submit product:", error);
@@ -310,7 +310,7 @@ const AddProductPage = () => {
                     Final Total
                   </Label>
                   <div className="h-14 flex items-center px-5 bg-[#21C45D] text-white rounded-2xl font-black text-lg shadow-inner">
-                    ৳ {finalPrice.toLocaleString()}
+                    ৳ {finalprice.toLocaleString()}
                   </div>
                 </div>
               </div>
@@ -482,36 +482,151 @@ const AddProductPage = () => {
                     >
                       <SelectGroup>
                         <SelectLabel className="text-[10px] font-black uppercase text-slate-300 px-4 py-2">
-                          Tech
+                          Cooking Essentials
                         </SelectLabel>
                         <SelectItem
-                          value="vegetable"
+                          value="cooking-oil"
                           className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
                         >
-                          Vegetable
+                          Cooking Oil
                         </SelectItem>
                         <SelectItem
-                          value="laptops"
+                          value="salt-sugar"
                           className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
                         >
-                          Laptops
+                          Salt & Sugar
+                        </SelectItem>
+                        <SelectItem
+                          value="spices"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Spices (Masala)
+                        </SelectItem>
+                        <SelectItem
+                          value="vinegar-sauces"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Vinegar & Sauces
                         </SelectItem>
                       </SelectGroup>
+
                       <SelectGroup>
                         <SelectLabel className="text-[10px] font-black uppercase text-slate-300 px-4 py-2">
-                          Lifestyle
+                          Meat, Fish & Eggs
                         </SelectLabel>
                         <SelectItem
-                          value="men"
+                          value="chicken"
                           className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
                         >
-                          Men's Fashion
+                          Chicken
                         </SelectItem>
                         <SelectItem
-                          value="women"
+                          value="beef-mutton"
                           className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
                         >
-                          Women's Fashion
+                          Beef & Mutton
+                        </SelectItem>
+                        <SelectItem
+                          value="fish"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Fish (Fresh / Frozen)
+                        </SelectItem>
+                        <SelectItem
+                          value="eggs"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Eggs
+                        </SelectItem>
+                      </SelectGroup>
+
+                      <SelectGroup>
+                        <SelectLabel className="text-[10px] font-black uppercase text-slate-300 px-4 py-2">
+                          Dairy & Frozen Foods
+                        </SelectLabel>
+                        <SelectItem
+                          value="milk"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Milk
+                        </SelectItem>
+                        <SelectItem
+                          value="butter-ghee"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Butter & Ghee
+                        </SelectItem>
+                        <SelectItem
+                          value="cheese"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Cheese
+                        </SelectItem>
+                        <SelectItem
+                          value="yogurt"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Yogurt
+                        </SelectItem>
+                        <SelectItem
+                          value="ice-cream"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Ice Cream
+                        </SelectItem>
+                      </SelectGroup>
+
+                      <SelectGroup>
+                        <SelectLabel className="text-[10px] font-black uppercase text-slate-300 px-4 py-2">
+                          Snacks & Biscuits
+                        </SelectLabel>
+                        <SelectItem
+                          value="biscuits"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Biscuits
+                        </SelectItem>
+                        <SelectItem
+                          value="chips-namkeen"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Chips & Namkeen
+                        </SelectItem>
+                        <SelectItem
+                          value="chocolates"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Chocolates
+                        </SelectItem>
+                        <SelectItem
+                          value="cakes-bakery"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Cakes & Bakery Items
+                        </SelectItem>
+                      </SelectGroup>
+
+                      <SelectGroup>
+                        <SelectLabel className="text-[10px] font-black uppercase text-slate-300 px-4 py-2">
+                          Beverages
+                        </SelectLabel>
+                        <SelectItem
+                          value="tea-coffee"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Tea & Coffee
+                        </SelectItem>
+                        <SelectItem
+                          value="soft-drinks"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Soft Drinks
+                        </SelectItem>
+                        <SelectItem
+                          value="juice"
+                          className="py-3 focus:bg-[#21C45D] focus:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          Juice
                         </SelectItem>
                       </SelectGroup>
                     </SelectContent>
