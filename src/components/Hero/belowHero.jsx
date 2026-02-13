@@ -44,11 +44,11 @@ export const features = [
 const BelowHero = () => {
     return (
         <Container >
-            <div className='p-8 shadow-md  bg-[#FFFFFF]  rounded-md border-black/20 mt-4 flex items-center justify-between'>
+            <div className='p-8 lg:shadow-md  bg-[#FFFFFF]  rounded-md border-black/20 mt-4 flex md:flex-row flex-col md:items-center justify-between'>
                 {
                 features.map((f)=>{
                     return (
-                        <div key={`${f.slug}`} className='flex items-center gap-4'>
+                        <div key={`${f.slug}`} className='flex  px-2 py-4 border-b border-b-gray-300 md:border-0 items-center gap-4'>
                           <div>
                             <f.icon className='text-[#00B307]' size={30}/>
                           </div>
