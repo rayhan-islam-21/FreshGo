@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPopularProducts } from "@/store/slices/popularProductsSlice";
 import Image from "next/image";
 import { ShoppingBag, Heart, Eye, Star } from "lucide-react"; // Using lucide-react for icons
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import ProductQuickView from "./ProductQuickView";
 
 const PopularProducts = () => {
   const dispatch = useDispatch();
@@ -44,45 +46,55 @@ const PopularProducts = () => {
         {/* Product Grid - Using a thin border-collapse style */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 border-gray-100">
           {popular10.map((product) => (
-            <Link href={`/products/${product.slug}`} key={product.id}>
+            <Dialog key={product.id}>
               <div
-                key={product.id}
                 className="group border-2 relative p-4  rounded-lg border-gray-100 hover:shadow-lg transition-all hover:border-[#00B307] duration-300 z-10 hover:z-20 bg-white"
               >
                 {/* Action Buttons (Visible on Hover) */}
-                <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
-                  <button onClick={(e)=>{
-                    e.preventDefault()
-                    e.stopPropagation()
-                  }} className="p-2 bg-white border border-gray-100 rounded-full shadow-sm hover:bg-green-600 hover:text-white transition">
+                <div className="absolute top-4 right-4 flex flex-col gap-2  transition-opacity duration-300 z-30">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    className="p-2 bg-white border border-gray-100 rounded-full shadow-sm hover:bg-green-600 hover:text-white transition"
+                  >
                     <Heart size={16} />
                   </button>
-                  <button onClick={(e)=>{
-                    e.preventDefault()
-                    e.stopPropagation()
-                  }} className="p-2 bg-white border border-gray-100 rounded-full shadow-sm hover:bg-green-600 hover:text-white transition">
-                    <Eye size={16} />
-                  </button>
+                  <DialogTrigger asChild>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      className="p-2 bg-white border border-gray-100 rounded-full shadow-sm hover:bg-green-600 hover:text-white transition"
+                    >
+                      <Eye size={16} />
+                    </button>
+                  </DialogTrigger>
                 </div>
 
                 {/* Image Container */}
-                <div className="relative aspect-square w-full mb-4">
-                  <Image
-                    src={product.images[0]}
-                    alt={product.name}
-                    fill
-                    className="object-contain p-2"
-                  />
-                </div>
+                <Link href={`/products/${product.slug}`}>
+                  <div className="relative aspect-square w-full mb-4">
+                    <Image
+                      src={product.images[0]}
+                      alt={product.name}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+                </Link>
 
                 {/* Details */}
                 <div className="space-y-1">
                   <p className="text-xs text-gray-400 font-medium">
                     {product.category}
                   </p>
-                  <h3 className="text-sm font-medium text-gray-800 line-clamp-1">
-                    {product.name}
-                  </h3>
+                  <Link href={`/products/${product.slug}`}>
+                    <h3 className="text-sm font-medium text-gray-800 line-clamp-1">
+                      {product.name}
+                    </h3>
+                  </Link>
 
                   {/* Price & Cart Row */}
                   <div className="flex items-center justify-between mt-2">
@@ -110,16 +122,21 @@ const PopularProducts = () => {
                     </div>
 
                     {/* Add to Cart Button */}
-                    <button onClick={(e)=>{
-                      e.preventDefault()
-                      e.stopPropagation()
-                    }} className="p-2.5 bg-gray-100 text-gray-600 rounded-full hover:bg-green-600 hover:text-white transition-colors duration-300">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                      }}
+                      className="p-2.5 bg-gray-100 text-gray-600 rounded-full hover:bg-green-600 hover:text-white transition-colors duration-300"
+                    >
                       <ShoppingBag size={18} />
                     </button>
                   </div>
                 </div>
               </div>
-            </Link>
+
+            <ProductQuickView product={product} />
+            </Dialog>
           ))}
         </div>
       </Container>
