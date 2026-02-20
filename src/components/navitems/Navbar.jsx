@@ -3,15 +3,18 @@ import React from "react";
 import Container from "../Container";
 import { PiPhoneCallLight } from "react-icons/pi";
 import { IoSearch } from "react-icons/io5";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
     <Container className="flex flex-col md:flex-row items-center justify-between py-4 md:py-6 border-t border-t-[#999999]/10 gap-4 md:gap-6">
       
       {/* Logo */}
-      <div className="flex items-center gap-2">
+      <div>
+       <Link className="flex items-center gap-2" href="/">
         <Image src="/nav-logo.png" alt="logo" width={30} height={30} />
         <h1 className="text-xl font-bold">FreshGo</h1>
+       </Link>
       </div>
 
       {/* Search Bar */}

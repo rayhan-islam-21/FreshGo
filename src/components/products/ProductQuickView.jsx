@@ -6,7 +6,6 @@ import { Heart, ShoppingCart, Minus, Plus, Star, ArrowRight, Leaf } from "lucide
 import { DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -14,7 +13,7 @@ const ProductQuickView = ({ product, onAddToCart, onAddToWishlist }) => {
   const router = useRouter();
   const { slug, price, category, finalprice, name, discount, stock, description, images } = product;
 
-  const [weight, setWeight] = useState(1); // Default 1kg
+  const [weight, setWeight] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
 
   const handleIncrement = () => {
@@ -140,7 +139,7 @@ const ProductQuickView = ({ product, onAddToCart, onAddToWishlist }) => {
                 >
                   <Minus size={18} />
                 </Button>
-                <div className="flex flex-col items-center px-4 min-w-[60px]">
+                <div className="flex flex-col items-center px-4 min-w-15">
                     <span className="font-black text-lg text-slate-800 leading-none">{weight}</span>
                     <span className="text-[10px] font-bold text-slate-400 uppercase">kg</span>
                 </div>
