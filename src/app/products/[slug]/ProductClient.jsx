@@ -11,10 +11,12 @@ import {
   RefreshCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "@/store/slices/cartSlice";
 
 const ProductPage = ({ product }) => {
-  const [quatity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const {
     slug,
     price,
@@ -27,19 +29,39 @@ const ProductPage = ({ product }) => {
     images,
   } = product;
 
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state.cart.items);
+
   const discountPercentage =
     product.discount && product.price
       ? Math.round((product.discount / product.price) * 100)
       : 0;
 
   const handleIncremnet = () => {
-    if (stock > quatity) {
+    if (stock > quantity) {
       setQuantity((prev) => prev + 1);
     }
   };
   const handleDecremnet = () => {
     setQuantity((prev) => Math.max(1, prev - 1));
   };
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        finalprice: product.finalprice,
+        image: product.images[0],
+        quantity: quantity,
+      }),
+    );
+  };
+
+  useEffect(() => {
+    console.log("UPDATED CART:", selector);
+  }, [selector]);
 
   return (
     <section className="py-12 bg-white">
@@ -144,7 +166,7 @@ const ProductPage = ({ product }) => {
                   -
                 </Button>
                 <h1 className="font-black text-2xl">
-                  {quatity} <span className="text-sm text-slate-400">kg</span>
+                  {quantity} <span className="text-sm text-slate-400">kg</span>
                 </h1>
                 <Button
                   onClick={handleIncremnet}
@@ -158,9 +180,12 @@ const ProductPage = ({ product }) => {
 
             <div className="space-y-4 pt-4">
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="flex-1 flex items-center justify-center gap-3 px-8 py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 active:scale-95 transition-all shadow-md">
+                <Button
+                  onClick={handleAddToCart}
+                  className="flex-1 flex items-center justify-center gap-3 px-8 py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 active:scale-95 transition-all shadow-md"
+                >
                   <ShoppingBag size={20} /> Add to Cart
-                </button>
+                </Button>
                 <button className="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors group">
                   <Heart
                     size={20}
