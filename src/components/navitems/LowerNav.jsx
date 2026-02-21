@@ -1,19 +1,13 @@
+"use client"
 import Container from "../Container";
 import Link from "next/link";
-import { HiOutlineBars3 } from "react-icons/hi2";
 import { FaRegHeart } from "react-icons/fa6";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { GoPerson } from "react-icons/go";
-import { IoIosArrowDown } from "react-icons/io";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
+import { useSelector } from "react-redux";
 
 const LowerNav = () => {
+  const {items} = useSelector((state)=>state.cart)
   return (
     <div className="">
       <Container className="flex items-center justify-between h-16">
@@ -47,8 +41,9 @@ const LowerNav = () => {
             <FaRegHeart size={22} />
           </Link>
 
-          <Link href="/cart" className="text-white hover:text-green-500">
+          <Link href="/cart" className="text-white relative  p-2 hover:text-green-500">
             <HiOutlineShoppingBag size={22} />
+            <span className="absolute top-0 text-xs flex items-center  justify-center -right-0.5 h-5 w-5  rounded-full bg-red-600">{items.length}</span>
           </Link>
 
           <Link href="/profile" className="text-white hover:text-green-500">
