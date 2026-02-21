@@ -1,3 +1,6 @@
-export async function GET(req) {
-  return new Response(JSON.stringify({ message: 'NextAuth route placeholder' }), { status: 200 })
-}
+import NextAuth from "next-auth"
+import { authConfig } from "@/auth"
+
+const handler = NextAuth(authConfig)
+
+export { handler as GET, handler as POST }
