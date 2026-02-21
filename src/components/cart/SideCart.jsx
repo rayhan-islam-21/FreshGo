@@ -15,12 +15,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, setOpen } from "@/store/slices/cartSlice";
 import Image from "next/image";
 import { ImCross } from "react-icons/im";
-import { Separator } from "../ui/separator";
 import { IoBagCheckOutline, IoCartOutline } from "react-icons/io5";
 
 const SideCart = () => {
   const dispatch = useDispatch();
   const { isOpen, items } = useSelector((state) => state.cart);
+  const totalPrice = items.reduce((prev, curr) => {
+    return prev + curr.finalprice * curr.quantity;
+  }, 0);
   return (
     <div>
       <Sheet open={isOpen} onOpenChange={(value) => dispatch(setOpen(value))}>
@@ -69,23 +71,33 @@ const SideCart = () => {
               );
             })}
           </div>
-          <div className="flex flex-col w-full gap-2.5 ">
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-green-500 cursor-pointer  rounded-sm shadow p-2 text-white"
-            >
-              <IoBagCheckOutline size={16} />
-              <span className="text-sm">Checkout</span>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-white rounded-sm hover:bg-green-400 hover:text-white cursor-pointer shadow-sm text-green-500 border-0"
-            >
-              <IoCartOutline />
-              <span className="text-sm ">Go To Cart</span>
-            </Button>
+          <div className=" ">
+            <div className="flex items-center justify-between mb-2 p-1">
+              <h1>{items.length} product</h1>
+              <h1>
+                {" "}
+                <span>Total:</span>
+                <span className="text-green-700 text-lg">৳ {totalPrice}</span>
+              </h1>
+            </div>
+            <div className="w-full flex flex-col gap-2.5">
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-green-500 cursor-pointer  rounded-sm shadow p-2 text-white"
+              >
+                <IoBagCheckOutline size={16} />
+                <span className="text-sm">Checkout</span>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-white rounded-sm hover:bg-green-400 hover:text-white cursor-pointer shadow-sm text-green-500 border-0"
+              >
+                <IoCartOutline />
+                <span className="text-sm ">Go To Cart</span>
+              </Button>
+            </div>
           </div>
         </SheetContent>
       </Sheet>
