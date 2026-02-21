@@ -2,16 +2,36 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Heart, ShoppingCart, Minus, Plus, Star, ArrowRight, Leaf } from "lucide-react";
+import {
+  Heart,
+  ShoppingCart,
+  Minus,
+  Plus,
+  Star,
+  ArrowRight,
+  Leaf,
+} from "lucide-react";
 import { DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/store/slices/cartSlice";
 
-const ProductQuickView = ({ product, onAddToCart, onAddToWishlist }) => {
+const ProductQuickView = ({ product}) => {
   const router = useRouter();
-  const { slug, price, category, finalprice, name, discount, stock, description, images } = product;
+  const {
+    slug,
+    price,
+    category,
+    finalprice,
+    name,
+    discount,
+    stock,
+    description,
+    images,
+  } = product;
 
   const [weight, setWeight] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
@@ -29,6 +49,20 @@ const ProductQuickView = ({ product, onAddToCart, onAddToWishlist }) => {
   };
 
   const totalPrice = (finalprice * weight).toLocaleString();
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        finalprice: product.finalprice,
+        image: product.images[0],
+        quantity: weight,
+      }),
+    );
+  };
 
   return (
     <DialogContent className="max-w-[95vw] md:max-w-5xl p-0 overflow-hidden bg-white rounded-3xl border-none shadow-2xl max-h-[95vh] overflow-y-auto">
@@ -59,10 +93,17 @@ const ProductQuickView = ({ product, onAddToCart, onAddToWishlist }) => {
                 onClick={() => setActiveImg(idx)}
                 className={cn(
                   "relative h-16 w-16 min-w-[68px] rounded-xl border-2 transition-all bg-white overflow-hidden",
-                  activeImg === idx ? "border-emerald-800 shadow-md scale-105" : "border-transparent opacity-60"
+                  activeImg === idx
+                    ? "border-emerald-800 shadow-md scale-105"
+                    : "border-transparent opacity-60",
                 )}
               >
-                <Image src={img} alt={`${name} ${idx}`} fill className="object-cover" />
+                <Image
+                  src={img}
+                  alt={`${name} ${idx}`}
+                  fill
+                  className="object-cover"
+                />
               </button>
             ))}
           </div>
@@ -86,32 +127,49 @@ const ProductQuickView = ({ product, onAddToCart, onAddToWishlist }) => {
             </h2>
 
             <div className="flex items-baseline gap-2 mb-6">
-              <span className="text-3xl font-black text-emerald-600 font-mono">৳{finalprice}</span>
+              <span className="text-3xl font-black text-emerald-600 font-mono">
+                ৳{finalprice}
+              </span>
               <span className="text-gray-500 font-medium">/ per kg</span>
               {discount > 0 && (
-                <span className="text-lg text-gray-400 line-through ml-2">৳{price}</span>
+                <span className="text-lg text-gray-400 line-through ml-2">
+                  ৳{price}
+                </span>
               )}
             </div>
 
             <div className="bg-emerald-50 rounded-xl p-4 mb-6 flex items-center justify-between">
-                <div>
-                    <p className="text-[10px] uppercase tracking-widest text-emerald-600 font-bold">Availability</p>
-                    <p className={cn("text-sm font-bold", stock > 0 ? "text-slate-700" : "text-red-500")}>
-                        {stock > 0 ? `Fresh Stock: ${stock} kg available` : "Out of Season"}
-                    </p>
-                </div>
-                {stock < 10 && stock > 0 && (
-                    <Badge variant="destructive" className="animate-pulse">Limited Stock</Badge>
-                )}
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-emerald-600 font-bold">
+                  Availability
+                </p>
+                <p
+                  className={cn(
+                    "text-sm font-bold",
+                    stock > 0 ? "text-slate-700" : "text-red-500",
+                  )}
+                >
+                  {stock > 0
+                    ? `Fresh Stock: ${stock} kg available`
+                    : "Out of Season"}
+                </p>
+              </div>
+              {stock < 10 && stock > 0 && (
+                <Badge variant="destructive" className="animate-pulse">
+                  Limited Stock
+                </Badge>
+              )}
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Description</h4>
+              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                Description
+              </h4>
               <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">
                 {description}
               </p>
-              <Button 
-                variant="link" 
+              <Button
+                variant="link"
                 onClick={handleReadMore}
                 className="p-0 h-auto text-emerald-600 font-bold flex items-center gap-1 hover:underline"
               >
@@ -123,8 +181,13 @@ const ProductQuickView = ({ product, onAddToCart, onAddToWishlist }) => {
           {/* Bottom Actions */}
           <div className="mt-10 pt-6 border-t border-slate-100 space-y-4">
             <div className="flex items-center justify-between">
-                <span className="text-sm font-bold text-slate-500">Select Weight</span>
-                <span className="text-sm font-bold text-slate-900">Total: <span className="text-emerald-600 text-lg">৳{totalPrice}</span></span>
+              <span className="text-sm font-bold text-slate-500">
+                Select Weight
+              </span>
+              <span className="text-sm font-bold text-slate-900">
+                Total:{" "}
+                <span className="text-emerald-600 text-lg">৳{totalPrice}</span>
+              </span>
             </div>
 
             <div className="flex flex-wrap sm:flex-nowrap gap-3">
@@ -140,8 +203,12 @@ const ProductQuickView = ({ product, onAddToCart, onAddToWishlist }) => {
                   <Minus size={18} />
                 </Button>
                 <div className="flex flex-col items-center px-4 min-w-15">
-                    <span className="font-black text-lg text-slate-800 leading-none">{weight}</span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">kg</span>
+                  <span className="font-black text-lg text-slate-800 leading-none">
+                    {weight}
+                  </span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase">
+                    kg
+                  </span>
                 </div>
                 <Button
                   variant="ghost"
@@ -155,8 +222,8 @@ const ProductQuickView = ({ product, onAddToCart, onAddToWishlist }) => {
               </div>
 
               <div className="flex gap-2 w-full">
-                <Button 
-                  onClick={() => onAddToCart?.(product, weight)}
+                <Button
+                  onClick={() => handleAddToCart()}
                   disabled={stock === 0}
                   className="flex-1 h-14 rounded-lg bg-green-500 hover:bg-green-600 text-white font-bold gap-3 shadow-lg shadow-emerald-100 transition-all active:scale-95"
                 >
@@ -164,12 +231,15 @@ const ProductQuickView = ({ product, onAddToCart, onAddToWishlist }) => {
                   Add to Cart
                 </Button>
 
-                <Button 
+                <Button
                   onClick={() => onAddToWishlist?.(product)}
-                  variant="outline" 
+                  variant="outline"
                   className="h-14 w-14 rounded-2xl border-slate-200 hover:bg-rose-50 hover:border-rose-100 hover:text-rose-500 transition-all group"
                 >
-                  <Heart size={22} className="group-active:fill-rose-500 transition-colors" />
+                  <Heart
+                    size={22}
+                    className="group-active:fill-rose-500 transition-colors"
+                  />
                 </Button>
               </div>
             </div>

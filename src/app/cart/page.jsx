@@ -1,8 +1,13 @@
-export default function CartPage() {
+import MyCart from '@/components/cart/MyCart';
+import Container from '@/components/Container';
+import React from 'react';
+
+const page = () => {
   return (
-    <section>
-      <h2>Your Cart</h2>
-      <p>Cart items placeholder.</p>
-    </section>
-  )
-}
+    <Container>
+      <MyCart/>
+    </Container>
+  );
+};
+
+export default page;

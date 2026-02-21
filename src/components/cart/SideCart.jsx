@@ -16,6 +16,7 @@ import { removeFromCart, setOpen } from "@/store/slices/cartSlice";
 import Image from "next/image";
 import { ImCross } from "react-icons/im";
 import { IoBagCheckOutline, IoCartOutline } from "react-icons/io5";
+import Link from "next/link";
 
 const SideCart = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const SideCart = () => {
       <Sheet open={isOpen} onOpenChange={(value) => dispatch(setOpen(value))}>
         <SheetContent
           side="right"
-          className="bg-white flex min-w-sm p-5 mx-auto"
+          className="bg-white flex  md:min-w-sm p-5 mx-auto"
         >
           <SheetHeader>
             <SheetTitle className="">
@@ -89,14 +90,13 @@ const SideCart = () => {
                 <IoBagCheckOutline size={16} />
                 <span className="text-sm">Checkout</span>
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-white rounded-sm hover:bg-green-400 hover:text-white cursor-pointer shadow-sm text-green-500 border-0"
+              <Link
+              href={`/cart`}
+                className="bg-white flex p-3 items-center justify-center gap-1 text-sm rounded-sm hover:bg-green-400 hover:text-white cursor-pointer shadow-sm text-green-500 border-0"
               >
-                <IoCartOutline />
+                <IoCartOutline size={16} />
                 <span className="text-sm ">Go To Cart</span>
-              </Button>
+              </Link>
             </div>
           </div>
         </SheetContent>

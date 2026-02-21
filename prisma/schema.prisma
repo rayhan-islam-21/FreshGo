@@ -1,23 +1,54 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
+
 model Product {
-  id String @id @default(uuid())
-  slug String @unique
-  name String 
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
   description String
-  price Float
+  price       Float
+  finalprice  Float
+  discount    Int?
+  stock       Int?
+  unlimited   Boolean  @default(false)
+  images      String[]
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+/////////////////////////
+// CART (Guest + Future User)
+/////////////////////////
+
+model Cart {
+  id        String     @id @default(uuid())
+  cartId    String     @unique   // stored in localStorage
+  userId    String?    // 🔥 future authentication support
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+
+model CartItem {
+  id         String  @id @default(uuid())
+  cartId     String
+  productId  String
+  name       String
+  image      String
+  price      Float
   finalprice Float
-  discount Int?
-  stock Int?
-  unlimited Boolean
-  images String[]
-  category String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  quantity   Int     @default(1)
+  cart       Cart    @relation(fields: [cartId], references: [cartId], onDelete: Cascade)
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
