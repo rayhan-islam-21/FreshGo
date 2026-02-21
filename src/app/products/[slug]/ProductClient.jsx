@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/store/slices/cartSlice";
+import SideCart from "@/components/cart/SideCart";
 
 const ProductPage = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -30,7 +31,7 @@ const ProductPage = ({ product }) => {
   } = product;
 
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state.cart.items);
+  const selector = useSelector((state) => state.cart);
 
   const discountPercentage =
     product.discount && product.price
@@ -181,10 +182,11 @@ const ProductPage = ({ product }) => {
             <div className="space-y-4 pt-4">
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
+                size="icon-lg"
                   onClick={handleAddToCart}
-                  className="flex-1 flex items-center justify-center gap-3 px-8 py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 active:scale-95 transition-all shadow-md"
+                  className="flex-1  flex items-center justify-center gap-3 px-8 py-7 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 active:scale-95 transition-all shadow-md"
                 >
-                  <ShoppingBag size={20} /> Add to Cart
+                  <ShoppingBag  size={28} /> Add to Cart
                 </Button>
                 <button className="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors group">
                   <Heart
